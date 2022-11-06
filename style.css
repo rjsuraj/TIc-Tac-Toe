@@ -1,0 +1,127 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: grid;
+    background-color: aqua;
+    justify-content: center;
+}
+
+.box {
+    display: inline-grid;
+    grid-template-columns: 150px 150px 150px;
+    grid-template-rows: 150px 150px 150px;
+    justify-content: center;
+    background: aqua;
+    padding: 20px 0px;
+}
+
+.item {
+    border: 5px solid rgb(13, 161, 146, 0.52);
+    font-size: 120px;
+    text-align: center;
+
+}
+
+.upper {
+    display: grid;
+    background: black;
+    height: 25vh;
+    grid-template-columns: 200px 200px;
+    grid-template-rows: 50px 50px;
+    grid-gap: 0px 100px;
+    justify-content: center;
+    align-content: center;
+}
+
+.footer {
+    background-color: black;
+    height: 5vh;
+    color: rgb(20, 189, 172);
+    text-align: center;
+    padding: 20px;
+}
+
+.Notselected {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+    align-content: center;
+    background: black;
+    color: white;
+    border-radius: 5px;
+    border-bottom: 0.2px solid grey;
+    border-top: 0.2px solid grey;
+    border-left: 0.2px solid grey;
+    border-right: 0.2px solid grey;
+    font-size: x-large;
+}
+
+.selected {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+    align-content: center;
+    background: black;
+    color: white;
+    border-radius: 5px;
+    border-bottom: 2px solid aqua;
+    border-top: 0.2px solid grey;
+    border-left: 0.2px solid grey;
+    border-right: 0.2px solid grey;
+    font-size: x-large;
+}
+
+.item3 {
+    display: grid;
+    grid-template-columns: auto;
+    grid-column: 1/span 2;
+    justify-content: center;
+    align-content: flex-end;
+    color: grey;
+    font-size: large;
+    font-family: 'Rubik', sans-serif;
+}
+
+#b1 {
+    border-style: none solid solid none;
+}
+
+#b1 {
+    border-style: none solid solid none;
+}
+
+#b2 {
+    border-style: none solid solid solid;
+}
+
+#b3 {
+    border-style: none none solid solid;
+}
+
+#b4 {
+    border-style: solid solid solid none;
+}
+
+#b6 {
+    border-style: solid none solid solid;
+}
+
+#b7 {
+    border-style: solid solid none none;
+}
+
+#b8 {
+    border-style: solid solid none solid;
+}
+
+#b9 {
+    border-style: solid none none solid;
+}
+
+.item:hover {
+    background-color: rgb(13, 161, 146, 0.52);
+    ;
+}
