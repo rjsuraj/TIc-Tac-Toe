@@ -19,68 +19,74 @@ let player2 = document.getElementById("player2")
 let player1 = document.getElementById("player1")
 let upper = document.getElementsByClassName("upper")[0]
 
-function CheckLine(no){
-    if (no == 1) {
-        if (MatchRecord[1] == MatchRecord[2] && MatchRecord[1] == MatchRecord[3]) {
-            console.log(MatchRecord[1], " win")
-            upper.lastElementChild.innerHTML = `<p>${MatchRecord[1]} - Win</p>`
+function win(no1,no2,no3){
+    if (MatchRecord[no1] == MatchRecord[no2] && MatchRecord[no1] == MatchRecord[no3]) {
+        console.log(MatchRecord[no1], " win")
+        upper.lastElementChild.innerHTML = `<p>${MatchRecord[1]} - Win</p>`
+    
+        window[`b${no1}`].classList.add("win")
+        window[`b${no2}`].classList.add("win")
+        window[`b${no3}`].classList.add("win")
+        window[`b${no1}`].classList.add("noHover")
+        window[`b${no2}`].classList.add("noHover")
+        window[`b${no3}`].classList.add("noHover")
+     
+        for(let i = 0;i<9;i++){
+            ClickCount[i] = 2
         }
+
+        if(player1.classList.contains("selected")){
+            player1.classList.add("Notselected")
+            player1.classList.remove("selected")
+        }
+        else{
+            player2.classList.add("Notselected")
+            player2.classList.remove("selected")
+        }
+    }
+}
+
+function CheckLine(no) {
+    if (no == 1) {
+        win(1,2,3)
     }
     else if (no == 2) {
-        if(MatchRecord[5] == MatchRecord[2] && MatchRecord[5] == MatchRecord[8]){
-            console.log(MatchRecord[5]," win")
-            upper.lastElementChild.innerHTML = `<p>${MatchRecord[5]} - Win</p>`
-            
-        }
+        win(5,2,8)
     }
     else if (no == 3) {
-        if(MatchRecord[9] == MatchRecord[3] && MatchRecord[9] == MatchRecord[6]){
-            console.log(MatchRecord[9]," win")
-            upper.lastElementChild.innerHTML = `<p>${MatchRecord[9]} - Win</p>`
-            
-        }
+        win(9,3,6)
     }
     else if (no == 4) {
-        if(MatchRecord[1] == MatchRecord[4] && MatchRecord[1] == MatchRecord[7]){
-            console.log(MatchRecord[1]," win")
-            upper.lastElementChild.innerHTML = `<p>${MatchRecord[1]} - Win</p>`
-        }
+        win(1,4,7)
     }
     else if (no == 5) {
-        if(MatchRecord[5] == MatchRecord[4] && MatchRecord[5] == MatchRecord[6]){
-            console.log(MatchRecord[5]," win")
-            upper.lastElementChild.innerHTML = `<p>${MatchRecord[5]} - Win</p>`
-            
-        }
+        win(5,4,6)
     }
     else if (no == 7) {
-        if(MatchRecord[5] == MatchRecord[7] && MatchRecord[5] == MatchRecord[3]){
-            console.log(MatchRecord[5]," win")
-            upper.lastElementChild.innerHTML = `<p>${MatchRecord[5]} - Win</p>`
-            
-        }
+        win(5,7,3)
     }
     else if (no == 8) {
-        if(MatchRecord[9] == MatchRecord[8] && MatchRecord[9] == MatchRecord[7]){
-            console.log(MatchRecord[9]," win")
-            upper.lastElementChild.innerHTML = `<p>${MatchRecord[9]} - Win</p>`
-            
-        }
+        win(9,8,7)
     }
     else if (no == 9) {
-        if(MatchRecord[1] == MatchRecord[5] && MatchRecord[1] == MatchRecord[9]){
-            console.log(MatchRecord[1]," win")
-            upper.lastElementChild.innerHTML = `<p>${MatchRecord[1]} - Win</p>`
-        
-        }
+        win(1,5,9)
     }
 }
 
 function PlayingTurn(no) {
     flag = false
+
     if (Xturn == true && ClickCount[no - 1] == 0) {
         Xturn = false
         Oturn = true
+
+        ClickCount[no - 1] = 1
+        let Totalmoves = 0;
+        for (let i = 0; i < 9; i++) {
+            Totalmoves = Totalmoves + ClickCount[i];
+        }
+        console.log("Totalmoves-", Totalmoves)
+
 
 
         player2.classList.add("selected")
@@ -89,7 +95,6 @@ function PlayingTurn(no) {
         player1.classList.add("Notselected")
         player1.classList.remove("selected")
 
-        ClickCount[no - 1] = 1
 
 
         if (no == 1) {
@@ -120,8 +125,20 @@ function PlayingTurn(no) {
             b9.innerHTML = "X"
         }
 
-        upper.lastElementChild.innerHTML = `<p>O - Turn</p>`
-
+        if (Totalmoves != 9) {
+            upper.lastElementChild.innerHTML = `<p>O - Turn</p>`
+        }
+        else {
+            upper.lastElementChild.innerHTML = `<p>GameOver - Draw</p>`
+            if(player1.classList.contains("selected")){
+                player1.classList.add("Notselected")
+                player1.classList.remove("selected")
+            }
+            else{
+                player2.classList.add("Notselected")
+                player2.classList.remove("selected")
+            }
+        }
         // storing match results
         MatchRecord[no] = "X"
 
@@ -130,13 +147,22 @@ function PlayingTurn(no) {
         Oturn = false
         Xturn = true
 
+        ClickCount[no - 1] = 1
+        let Totalmoves = 0;
+        for (let i = 0; i < 9; i++) {
+            Totalmoves = Totalmoves + ClickCount[i];
+        }
+        console.log("Totalmoves-", Totalmoves)
+
+
         player1.classList.add("selected")
         player1.classList.remove("Notselected")
 
         player2.classList.add("Notselected")
         player2.classList.remove("selected")
 
-        ClickCount[no - 1] = 1
+
+
 
         if (no == 1) {
             b1.innerHTML = "O"
@@ -166,59 +192,94 @@ function PlayingTurn(no) {
             b9.innerHTML = "O"
         }
 
-
-        upper.lastElementChild.innerHTML = `<p>X - Turn</p>`
+        if (Totalmoves != 9) {
+            upper.lastElementChild.innerHTML = `<p>X - Turn</p>`
+        }
+        else {
+            upper.lastElementChild.innerHTML = `<p>GameOver - Draw</p>`
+            if(player1.classList.contains("selected")){
+                player1.classList.add("Notselected")
+                player1.classList.remove("selected")
+            }
+            else{
+                player2.classList.add("Notselected")
+                player2.classList.remove("selected")
+            }
+        }
 
         // storing match results
         MatchRecord[no] = "O"
     }
 
-    if(no==1){
-        CheckLine(1)
-        CheckLine(4)
-        CheckLine(9)
+    if (no == 1) {
+        if (ClickCount[0] != 2) {
+            CheckLine(1)
+            CheckLine(4)
+            CheckLine(9)
+        }
     }
-    else if(no==2){
-        CheckLine(1)
-        CheckLine(2)
+    else if (no == 2) {
+        if (ClickCount[1] != 2) {
+
+            CheckLine(1)
+            CheckLine(2)
+        }
     }
-    else if(no==3){
-        CheckLine(1)
-        CheckLine(3)
-        CheckLine(7)
+    else if (no == 3) {
+        if (ClickCount[2] != 2) {
+            CheckLine(1)
+            CheckLine(3)
+            CheckLine(7)
+        }
     }
-    else if(no==4){
-       CheckLine(4)
-       CheckLine(5)
+    else if (no == 4) {
+        if (ClickCount[3] != 2) {
+
+            CheckLine(4)
+            CheckLine(5)
+        }
     }
-    else if(no==5){
-        CheckLine(5)
-        CheckLine(2)
+    else if (no == 5) {
+        if (ClickCount[4] != 2) {
+
+            CheckLine(5)
+            CheckLine(2)
+            CheckLine(9)
+            CheckLine(7)
+        }
     }
-    else if(no==6){
-        CheckLine(5)
-        CheckLine(3)
+    else if (no == 6) {
+        if (ClickCount[5] != 2) {
+
+            CheckLine(5)
+            CheckLine(3)
+        }
     }
-    else if(no==7){
-        CheckLine(4)
-        CheckLine(7)
-        CheckLine(8)
+    else if (no == 7) {
+        if (ClickCount[6] != 2) {
+
+            CheckLine(4)
+            CheckLine(7)
+            CheckLine(8)
+        }
     }
-    else if(no==8){
-        CheckLine(8)
-        CheckLine(2)
+    else if (no == 8) {
+        if (ClickCount[7] != 2) {
+
+            CheckLine(8)
+            CheckLine(2)
+        }
     }
-    else if(no==9){
-        CheckLine(8)
-        CheckLine(9)
-        CheckLine(3)
+    else if (no == 9) {
+        if (ClickCount[8] != 2) {
+
+            CheckLine(8)
+            CheckLine(9)
+            CheckLine(3)
+        }
     }
 
-    let sum = 0;
-    for(let i = 0;i<9;i++){
-        sum = sum + ClickCount[i];
-    }
-    console.log("Totalmoves-",sum)
+
 }
 
 player1.addEventListener("click", () => {
@@ -280,4 +341,81 @@ b9.addEventListener("click", () => {
     PlayingTurn(9)
 })
 
+footer = document.getElementsByClassName("footer")[0]
+restart = footer.firstElementChild
 
+restart.addEventListener("click", () => {
+    Xturn = true
+    Oturn = false
+    flag = true
+
+    for(let i = 0;i<9;i++){
+
+        ClickCount[i] = 0
+    }
+    
+    for(let i = 1;i<=9;i++){
+
+        MatchRecord[i] = "none"
+    }
+
+    if(player1.classList.contains("Notselected")){
+
+        player1.classList.remove("Notselected")
+        player1.classList.add("selected")
+    }
+    if(player2.classList.contains("selected")){
+        player2.classList.remove("selected");
+        player2.classList.add("Notselected")
+    }
+
+    upper.lastElementChild.innerHTML = `<p>Start game or select player</p>`
+
+    b1.innerHTML = ""
+    b2.innerHTML = ""
+    b3.innerHTML = ""
+    b3.innerHTML = ""
+    b4.innerHTML = ""
+    b5.innerHTML = ""
+    b6.innerHTML = ""
+    b7.innerHTML = ""
+    b8.innerHTML = ""
+    b9.innerHTML = ""
+
+    if(b1.classList.contains("win")){
+        b1.classList.remove("win")
+        b1.classList.remove("noHover")
+    }
+    if(b2.classList.contains("win")){
+        b2.classList.remove("win")
+        b2.classList.remove("noHover")
+    }
+    if(b3.classList.contains("win")){
+        b3.classList.remove("win")
+        b3.classList.remove("noHover")
+    }
+    if(b4.classList.contains("win")){
+        b4.classList.remove("win")
+        b4.classList.remove("noHover")
+    }
+    if(b5.classList.contains("win")){
+        b5.classList.remove("win")
+        b5.classList.remove("noHover")
+    }
+    if(b6.classList.contains("win")){
+        b6.classList.remove("win")
+        b6.classList.remove("noHover")
+    }
+    if(b7.classList.contains("win")){
+        b7.classList.remove("win")
+        b7.classList.remove("noHover")
+    }
+    if(b8.classList.contains("win")){
+        b8.classList.remove("win")
+        b8.classList.remove("noHover")
+    }
+    if(b9.classList.contains("win")){
+        b9.classList.remove("win")
+        b9.classList.remove("noHover")
+    }
+})

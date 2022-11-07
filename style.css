@@ -38,10 +38,10 @@
 
 .footer {
     background-color: black;
-    height: 5vh;
+    height: 4vh;
     color: rgb(20, 189, 172);
     text-align: center;
-    padding: 20px;
+    padding: 17px 0px 25px 0px;
 }
 
 .Notselected {
@@ -124,4 +124,37 @@
 .item:hover {
     background-color: rgb(13, 161, 146, 0.52);
     ;
+}
+
+.noHover {
+    pointer-events: none;
+}
+
+.win {
+    background-color: #0def0d;
+    border-color: #0def0d;
+    box-shadow: 0px 8px 8px black;
+}
+.ResultsSize{
+    font-size: 30px;
+}
+.ResultsGap{
+    grid-row-gap: 10px;
+}
+a:hover{
+    color: white;
+    background-color: aqua;   
+}
+a{
+    color: aqua;
+    text-decoration-line: none;
+    text-decoration-color: none;
+    background-color: grey;
+    width: 50px;
+    display: inline-block;
+    width: 150px;
+    height: 30px;
+    padding-top: 5px;
+    margin-bottom: 2px;
+    border-radius: 5px
 }
