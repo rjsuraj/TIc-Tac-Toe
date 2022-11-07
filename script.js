@@ -22,7 +22,7 @@ let upper = document.getElementsByClassName("upper")[0]
 function win(no1,no2,no3){
     if (MatchRecord[no1] == MatchRecord[no2] && MatchRecord[no1] == MatchRecord[no3]) {
         console.log(MatchRecord[no1], " win")
-        upper.lastElementChild.innerHTML = `<p>${MatchRecord[1]} - Win</p>`
+        upper.lastElementChild.innerHTML = `<p>${MatchRecord[no1]} - Win</p>`
     
         window[`b${no1}`].classList.add("win")
         window[`b${no2}`].classList.add("win")
