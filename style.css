@@ -162,9 +162,12 @@ a{
 @media  screen and (max-width : 550px) {
     .upper{
         grid-template-columns: 110px 110px;
+        grid-template-rows: 40px 40px;
+        grid-column-gap: 50px;
     }
     .box{
-        grid-template-columns: 110px 110px 110px;
+        grid-template-columns: 100px 100px 100px;
+        grid-template-rows: 100px 100px 100px;
         padding: 40px 0px;
     }
 }
