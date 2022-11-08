@@ -121,10 +121,10 @@
     border-style: solid none none solid;
 }
 
-.item:hover {
+/* .item:hover {
     background-color: rgb(13, 161, 146, 0.52);
-    ;
-}
+
+} */
 
 .noHover {
     pointer-events: none;
@@ -144,10 +144,10 @@
     grid-row-gap: 10px;
 }
 
-a:hover {
+/* a:hover {
     color: white;
     background-color: aqua;
-}
+} */
 
 a {
     color: aqua;
@@ -173,12 +173,27 @@ a {
     .box {
         grid-template-columns: 100px 100px 100px;
         grid-template-rows: 100px 100px 100px;
-        padding: 75px 0px;
+        padding: 72px 0px;
     }
 
     .item {
         font-size: 90px;
     }
-
-   
+    
+}
+@media (hover: none) {
+    .item:active { background-color: rgb(13, 161, 146, 0.52);
+    }
+    a:active {
+        color: white;
+        background-color: aqua;
+    }
+}
+@media (hover: hover) {
+    .item:hover { background-color: rgb(13, 161, 146, 0.52);
+    }
+    a:hover {
+        color: white;
+        background-color: aqua;
+    }
 }
