@@ -159,10 +159,12 @@ a{
     border-radius: 5px
 }
 
-@media screen and (max-width : 600px){
+@media  screen and (max-width : 550px) {
     .upper{
-        width: 100%;
-        grid-template-columns: 150px 150px;
+        grid-template-columns: 110px 110px;
     }
-    
+    .box{
+        grid-template-columns: 110px 110px 110px;
+        padding: 40px 0px;
+    }
 }
